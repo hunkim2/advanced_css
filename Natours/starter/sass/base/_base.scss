@@ -1,0 +1,18 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+
+//defines what one rem is
+html {
+    font-size: 62.5%;
+}
+
+body {
+    /* Changes the box model, so change the border and the padding to be the total width or height */
+    box-sizing: border-box;
+}

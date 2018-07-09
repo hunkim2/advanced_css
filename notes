@@ -1,0 +1,187 @@
+Three pillars to Write Good HTML and CSS;
+
+Response Design:
+ - Fluid Layouts
+ - Media queries
+ - Responsive images
+ - Correct units
+ - Desktop-first vs Mobile-first
+
+Maintainable and Scalable Code:
+ - Clean
+ - Easy-to-understand
+ - Growth
+ - Reusable
+ - How to organize files
+ - How to name classes
+ - How to structure HTML
+
+Web Performance:
+ - Less HTTP requests
+ - Less Code
+ - Compress Code
+ - Use a CSS preprocessor
+ - Less images
+ - Compress images
+
+
+ Load HTML -> Parse HTML -> Builds Document Object Model (DOM)
+                |
+                v
+                Load CSS -> Parses CSS - two steps: (1) Resolve conflicting CSS declarations (cascade) (2) Process Final CSS values e.i. such as screen size -> CSS Object Model (CSSOM)
+                |
+                v
+                Render Tree -> Website rendering: the visual formatting model -> Final rendered website;
+
+Cascade: process of combining different stylesheets and resolving conflicts between different CSS rules and declarations,
+when more than one rule applies to a certain element
+
+Importance(weight) > Specificity > Source Order
+
+Importance:
+ 1. User !important declarations
+ 2. Author !important declarations
+ 3. Author declarations
+ 4. User declarations
+ 5. Default browser declarations
+
+Specificity:
+ 1. Inline stylesheet
+ 2. IDs
+ 3. Classes, pseudo-classes, attribute
+ 4. Elements, pseudo-elements
+
+Source Order:
+ 1. The last declaration in the code will override all other declarations and will be applied
+
+ The universal selector * has no specificity value (0,0,0,0)
+
+ Rely more on specificy than on the order of selectors
+
+ Rely on order when using 3rd-party stylesheets - always put your author stylesheet last.
+
+Declared value -> Cascaded Value -> Specified Value -> Computed Value -> Used Value
+
+
+`rem` font size is always relative to the root font size which in most browsers is defaulted to 16px;
+
+How Units are Converted From Relative to Absolute
+
+
+//remember that the parent's width is what's used to calculate computed css values;
+html, body {
+    font-size: 16px;
+    width: 80vw;
+}
+
+header {
+    font-size: 150%;  --> 150% of its parent element --> x% * parent's computed font-size --> 150% * 16px = 24px;
+    padding: 2em; (em behaves differently for length) --> x * current element's font-size --> 3 * 24 = 48px;
+    margin-bottom: 10rem; --> x * root value --> 10 * 16px = 160px;
+    height: 90vh;
+    width: 1000px;
+}
+
+.header-child {
+    font-size: 3em; --> x * parent --> 72px (3*24)
+    padding: 10%;
+}
+
+Why should we use em or rem for length based units?
+
+-Simply because by changing the font size, we can create much more robust and dynamic CSS and styles
+
+- 'inherit' keyword forces inheritance on a certain property;
+- 'initial' keyword resets a property to its initial value;
+
+
+*The Visual Formatting Model*
+
+Algorithm that calculates boxes and determines the layout of these boxes, for each element in the render tree,
+in order to determine the final layout of the page.
+
+
+- Dimensions of boxes: the box model;
+- Box type: inline, block and inline-block;
+- Positioning scheme: floats and positioning;
+- Stacking contexts;
+- Other elements in the render tree;
+- Viewport size, dimensions of images, etc;
+
+*Box-Types: Inline, Block-Level and Inline-Block*
+
+Block-level boxes: (including flex, list-item, and table)
+-Elements formatted visually as blocks
+-100% of parent's width
+-Veritcally, one after another
+-Box-model applies as showed
+
+Inline Boxes:
+-Content is distributed in lines
+-Occupies only content's space (or parent's space)
+-No line-breaks
+-No heights and widths
+-Paddings and margins only horizontal (left and right)
+
+Inline-block Boxes:
+-A mix of block and inline
+-Occupies only content's space
+-No line-breaks
+-Box-model applies as showed
+
+*Positioning Schemes: Normal Flow, Absolute Positioning and Floats*
+
+Normal Flow:
+-Default positioning scheme
+-NOT floated
+-NOT absolutely positioned
+-Elements laid out according to their source order
+
+e.i. position: relative;
+
+Floats:
+-Elements is removed from the normal flow;
+-Will go to the edge of the containing element
+-The container will not adjust its height to the element
+
+Absolute positioning:
+-Element is removed from the normal flow;
+-No impact on surrounding content or elements;
+-We use top, bottom, left, and right to offset the element from its relatively positioned container
+
+position: absolute;
+position: fixed;
+
+*CSS Architecture, Components, and BEM*
+
+Think -> Build -> Architect
+
+THINK:
+Component-Driven Design
+-Modular building blocks that make up interfaces
+-Held together by the layout of the page
+-Re-usable across a project, and between different projects
+-Independent, allowing us to use them anywhere on the page
+
+
+BEM: Block Element Modifier;
+
+BLOCK: standalone component that is meaningful on its own. .block{}
+ELEMENT: part of a block that has no standalone meaning. .block__element{}
+MODIFIER: a different version of a block or an element. .block__element--modifier{}
+
+
+The 7-1 Pattern
+ -7 different folers for partial Sass files, and 1 main Sass file to import all other fiels into a compiled CSS stylesheet
+
+ base/ basic product definitions
+ components/ one file for each component
+ layout/ layout of the project
+ pages/ specific pages
+ themes/ visual themes
+ abstracts/ variables or mixins
+ vendors/ where all third party css goes
+
+
+BUILDING CUSTOM GRIDS WITH CSS Floats
+
